@@ -1,0 +1,26 @@
+version: "3"
+services:
+  myapp:
+    build:
+      context: .
+    environment:
+      - AMQP_USER=ruser
+      - AMQP_PASSWORD=rpassword
+      - AMQP_ADDRESS=rabbitmq
+      - AMQP_VHOST=/
+      - AMQP_PORT=5672
+      - EXTERNAL_API_URL=http://external-api-url
+      - TELEGRAM_BOT_TOKEN=YOUR_TOKEN
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    hostname: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=ruser
+      - RABBITMQ_DEFAULT_PASS=rpassword
+      - RABBITMQ_DEFAULT_VHOST=/
+    ports:
+      - 15672:15672
+      - 5672:5672

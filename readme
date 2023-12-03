@@ -1,0 +1,41 @@
+Python application with Docker that asynchronously processes messages from a RabbitMQ queue and Telegram.
+
+--- Task: ---
+1) Docker setup:
+Create a Dockerfile to build an image of your Python application.
+Use docker-compose to manage the application container and any dependencies (e.g. RabbitMQ).
+
+2) Configuration via environment variables:
+Use the following environment variables to configure your connection to RabbitMQ:
+AMQP_USER: username for RabbitMQ.
+AMQP_PASSWORD: Password for RabbitMQ.
+AMQP_ADDRESS: RabbitMQ server address.
+AMQP_VHOST: RabbitMQ virtual host.
+AMQP_PORT: Port to connect to RabbitMQ.
+Use the EXTERNAL_API_URL environment variable to get the URL of external requests.
+
+3) Connecting to RabbitMQ:
+Implement a connection to RabbitMQ and configure listening for messages from queue "0".
+
+Two commands can arrive in the RabbitMQ queue:
+Processing the "print" command:
+When receiving the "print" command from the RabbitMQ queue, the application should display the last message received from the telegram bot.
+Additional advantage: Implementation of asynchronous display of all messages from the telegram bot on the screen, while continuing to listen to the queue.
+
+Processing the "send" command:
+When receiving the "send" command, the application must send a POST request to the URL specified in the EXTERNAL_API_URL environment variable.
+The content of the POST request must be in JSON format and include the latest message from the telegram bot.
+
+
+In simple words, what is expected from the application:
+It listens to the RabbitMQ queue, and depending on the message from the queue, by any method it receives the last incoming message that was sent to the created telegram bot and processes it.
+Ideally, the application displays messages on the screen as soon as they are sent to the telegram bot, while continuing to listen to the Rabbit queue and process commands from the queue.
+
+------
+
+How to run?
+
+1) Set your environment variables in file docker-compose.yml
+2) Run by docker
+3) Wait about 30s for running RabbitMq and message 'starting..'
+4) Enjoy!
